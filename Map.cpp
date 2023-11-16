@@ -1,17 +1,15 @@
 #include "Map.h"
 
-
-
 Map::Map(Vector2 size, Vector2 offset)
 {
 	_size = size;
 	_offset = offset;
 	_grid = new NodeGrid();
 
-	for (int x = 0; x < _size.X; x++)
+	for (int x = 0; x < _size.x; x++)
 	{
 		NodeColumn* colum = new NodeColumn();
-		for (int y = 0; y < _size.Y; y++)
+		for (int y = 0; y < _size.y; y++)
 		{
 			colum->push_back(new Node(Vector2(x, y)));
 		}
@@ -22,7 +20,7 @@ Map::Map(Vector2 size, Vector2 offset)
 
 Node* Map::UnsafeGetNode(Vector2 position)
 {
-	return (*(*_grid)[position.X])[position.Y];
+	return (*(*_grid)[position.x])[position.y];
 }
 
 void Map::UnSafeDraw(Vector2 offset)
@@ -44,7 +42,7 @@ void Map::SafePickNode(Vector2 position, SafePick safePickAction)
 	Vector2 size = _size;
 	_sizeMutex->unlock();
 
-	if (position.X >= _size.X || position.Y >= _size.Y)
+	if (position.x >= _size.x || position.y >= _size.y)
 	{
 		safePickAction(nullptr);
 		return;
@@ -70,7 +68,7 @@ void Map::SafePickNodes(std::list<Vector2> positions, SafeMultiPick safeMultiPic
 
 	for (Vector2 pos : positions)
 	{
-		if (pos.X >= size.X || pos.Y >= size.Y || pos.X < 0|| pos.Y < 0)
+		if (pos.x >= size.x || pos.y >= size.y || pos.x < 0|| pos.y < 0)
 		{
 			nodes->push_back(nullptr);
 			continue;

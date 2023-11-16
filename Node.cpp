@@ -27,7 +27,7 @@ void Node::DrawContent(Vector2 offset)
 	if (_content == nullptr)
 	{
 		ConsoleControl::LockMutex();
-		ConsoleControl::SetPosition(pos.X, pos.Y);
+		ConsoleControl::SetPosition(pos.x, pos.y);
 		std::cout << " ";
 		ConsoleControl::UnlockMutex();
 		return;

@@ -7,15 +7,15 @@ Vector2::Vector2()
 
 Vector2::Vector2(int x, int y)
 {
-	X = x;
-	Y = y;
+	x = x;
+	y = y;
 }
 
 Vector2 Vector2::operator+(Vector2 other)
 {
 	Vector2 result = *this;
-	result.X += other.X;
-	result.Y += other.Y;
+	result.x += other.x;
+	result.y += other.y;
 
 	return result;
 }
@@ -23,8 +23,8 @@ Vector2 Vector2::operator+(Vector2 other)
 Vector2 Vector2::operator-(Vector2 other)
 {
 	Vector2 result = *this;
-	result.X -= other.X;
-	result.Y -= other.Y;
+	result.x -= other.x;
+	result.y -= other.y;
 
 	return result;
 }

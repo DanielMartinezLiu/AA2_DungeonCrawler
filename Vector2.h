@@ -3,8 +3,8 @@
 class Vector2
 {
 public:
-	int X = 0;
-	int Y = 0;
+	int x = 0;
+	int y = 0;
 
 	Vector2();
 	Vector2(int x, int y);
