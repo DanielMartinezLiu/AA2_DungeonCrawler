@@ -17,7 +17,14 @@
 class Save
 {
 public:
+	Save();
+	~Save();
+
+	Character* character;
+	std::vector<Enemy*>* enemies = new std::vector<Enemy*>();
+
 	void SaveDungeonCrawler();
+	void LoadDungeonCrawler();
 
 	Json::Value Encode();
 	Save* Decode(Json::Value json);

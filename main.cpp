@@ -3,10 +3,6 @@
 #include "ConsoleControl.h"
 #include "Map.h"
 
-
-void CreateBaseCharacter();
-void ReadBaseCharacter();
-
 class Wall : public INodeContent
 {
 public:
@@ -29,25 +25,7 @@ int main()
 {
 	Map* map = new Map(Vector2(10, 10), Vector2(2, 2));
 	Save* save = new Save();
-	save->SaveDungeonCrawler();
-}
+	//save->SaveDungeonCrawler();
+	save->LoadDungeonCrawler();
 
-void ReadBaseCharacter()
-{
-	Character c;
-
-	Character* character = new Character(c);
-
-	std::ifstream jsonReadFile = std::ifstream("Character.json", std::ifstream::binary);
-
-	if (!jsonReadFile.fail())
-	{
-		Json::Value json;
-		jsonReadFile >> json;
-		jsonReadFile.close();
-
-		Character* character = Character::Decode(json["Character"]);
-
-		std::cout << "Life: " << character->currentLife << "\nCoin: " << character->currentCoin;
-	}
 }

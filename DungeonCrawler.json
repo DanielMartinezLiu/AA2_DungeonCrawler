@@ -18,15 +18,53 @@
 				"type" : 3
 			}
 		},
-		"Enemy" : 
-		{
-			"life" : 2,
-			"position" : 
+		"Enemies" : 
+		[
 			{
-				"x" : 0,
-				"y" : 0
+				"life" : 3,
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				},
+				"state" : 0
 			},
-			"state" : 1
-		}
+			{
+				"life" : 3,
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				},
+				"state" : 0
+			},
+			{
+				"life" : 3,
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				},
+				"state" : 0
+			},
+			{
+				"life" : 3,
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				},
+				"state" : 0
+			},
+			{
+				"life" : 3,
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				},
+				"state" : 0
+			}
+		]
 	}
 }
