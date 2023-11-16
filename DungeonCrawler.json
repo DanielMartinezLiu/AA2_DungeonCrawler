@@ -1,0 +1,32 @@
+{
+	"Map" : 
+	{
+		"Character" : 
+		{
+			"coin" : 30,
+			"life" : 10,
+			"position" : 
+			{
+				"x" : 0,
+				"y" : 0
+			},
+			"potions" : 1,
+			"weapons" : 
+			{
+				"damage" : 1,
+				"range" : 2,
+				"type" : 3
+			}
+		},
+		"Enemy" : 
+		{
+			"life" : 2,
+			"position" : 
+			{
+				"x" : 0,
+				"y" : 0
+			},
+			"state" : 1
+		}
+	}
+}

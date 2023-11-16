@@ -1,5 +1,15 @@
 #include "Character.h"
 
+Character::Character()
+{
+	currentLife = maxLife;
+}
+
+Character::~Character()
+{
+	
+}
+
 Json::Value Character::Encode()
 {
 	Json::Value json;
@@ -7,7 +17,8 @@ Json::Value Character::Encode()
 	json["life"] = currentLife;
 	json["coin"] = currentCoin;
 	json["potions"] = currentPotions;
-	json["weapons"] = currentWeapon;
+	json["weapons"] = currentWeapon->Encode();
+	json["position"] = currentPosition->Encode();
 
 	return json;
 }
@@ -20,6 +31,7 @@ Character* Character::Decode(Json::Value json)
 	character->currentCoin = json["coin"].asInt();
 	character->currentPotions = json["potions"].asInt();
 	character->currentWeapon = Weapon::Decode(json["weapons"]);
+	character->currentPosition = Vector2::Decode(json["position"]);
 	
 	return character;
 }

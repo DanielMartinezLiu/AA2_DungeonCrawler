@@ -1,9 +1,0 @@
-{
-	"Character" : 
-	{
-		"coin" : 30,
-		"life" : 10,
-		"potions" : 1,
-		"weapons" : true
-	}
-}

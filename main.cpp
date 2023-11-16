@@ -7,7 +7,6 @@
 void CreateBaseCharacter();
 void ReadBaseCharacter();
 
-
 class Wall : public INodeContent
 {
 public:
@@ -29,32 +28,8 @@ public:
 int main()
 {
 	Map* map = new Map(Vector2(10, 10), Vector2(2, 2));
-	CreateBaseCharacter();
-}
-
-void CreateBaseCharacter()
-{
-	Character* character = new Character();
-
-	character->currentLife = 10;
-	character->currentCoin = 30;
-	character->currentPotions = 1;
-
-	Axe* axe = new Axe();
-
-	character->currentWeapon = axe;
-
-	Json::Value json;
-	
-	json["Character"] = character->Encode();
-	
-	std::ofstream jsonWriteFile = std::ofstream("Character.json", std::ofstream::binary);
-
-	if (!jsonWriteFile.fail())
-	{
-		jsonWriteFile << json;
-		jsonWriteFile.close();
-	}
+	Save* save = new Save();
+	save->SaveDungeonCrawler();
 }
 
 void ReadBaseCharacter()

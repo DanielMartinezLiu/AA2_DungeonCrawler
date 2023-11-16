@@ -1,11 +1,13 @@
 #include "Save.h"
 
-void SaveDungeonCrawler()
+void Save::SaveDungeonCrawler()
 {
+	Save* save = new Save();
+
 	Json::Value json;
 
-	Character* character = new Character();
-	
+	json["Map"] = save->Encode();
+
 	std::ofstream jsonWriteFile = std::ofstream("DungeonCrawler.json", std::ofstream::binary);
 
 	if (!jsonWriteFile.fail())
@@ -19,23 +21,7 @@ Json::Value Save::Encode()
 {
 	Json::Value json;
 
-	json["Map"] = CreatedBaseCharacter();
-
-	return json;
-}
-
-Json::Value Save::CreatedBaseCharacter()
-{
-	Json::Value json;
-
-	json["Character"] = character->Encode();
-
-	return json;
-}
-
-// Only for testing
-Character* BaseCharacter()
-{
+#pragma region CharacterCreationTest
 	Character* character = new Character();
 
 	character->currentLife = 10;
@@ -43,8 +29,18 @@ Character* BaseCharacter()
 	character->currentPotions = 1;
 
 	Axe* axe = new Axe();
-
 	character->currentWeapon = axe;
+#pragma endregion
 
-	return character;
+#pragma region EnemyCreationTest
+	Enemy* enemy = new Enemy();
+
+	enemy->currentLife = 2;
+	enemy->currentState = Enemy::CHASING;
+#pragma endregion
+
+	json["Character"] = character->Encode();
+	json["Enemy"] = enemy->Encode();
+
+	return json;
 }
