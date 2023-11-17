@@ -21,11 +21,13 @@ public:
 	Save();
 	~Save();
 
-	Vector2* mapSize = new Vector2();
+	Vector2* mapSize;
 
 	Character* character;
-	std::vector<Enemy*>* enemies = new std::vector<Enemy*>();
-	std::vector<Portal*>* portals = new std::vector<Portal*>();
+	Map* map;
+
+	std::vector<Enemy*>* enemies;
+	std::vector<Portal*>* portals;
 
 	void SaveDungeonCrawler();
 	void LoadDungeonCrawler();
