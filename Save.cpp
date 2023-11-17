@@ -16,6 +16,11 @@ void Save::SaveDungeonCrawler()
 
 	json["Map"] = save->Encode();
 
+#pragma region MapTestValues
+	mapSize = new Vector2(10, 10);
+	json["MapSize"] = mapSize->Encode();
+#pragma endregion
+
 	std::ofstream jsonWriteFile = std::ofstream("DungeonCrawler.json", std::ofstream::binary);
 
 	if (!jsonWriteFile.fail())
@@ -24,7 +29,7 @@ void Save::SaveDungeonCrawler()
 		jsonWriteFile.close();
 	}
 }
-void LoadDungeonCrawler()
+void Save::LoadDungeonCrawler()
 {
 	Save* save = new Save();
 
@@ -36,9 +41,7 @@ void LoadDungeonCrawler()
 		jsonReadFile >> json;
 		jsonReadFile.close();
 
-		save = save->Decode(json["DungeonCrawler"]);
-
-		std::cout << "Character: " << save->character << "\nEnemies: " << save->enemies;
+		save = save->Decode(json["Map"]);
 	}
 }
 Json::Value Save::Encode()
@@ -46,12 +49,14 @@ Json::Value Save::Encode()
 	Json::Value json;
 
 #pragma region CharacterCreationTest
+
 	character->currentLife = 10;
 	character->currentCoin = 30;
 	character->currentPotions = 1;
 
 	Axe* axe = new Axe();
 	character->currentWeapon = axe;
+
 #pragma endregion
 #pragma region EnemyCreationTest
 
@@ -68,9 +73,23 @@ Json::Value Save::Encode()
 		enemyArray.append(enemy->Encode());
 	}
 #pragma endregion
+#pragma region PortalCreationTest
+	for (int i = 0; i < 5; i++)
+	{
+		Portal* portal = new Portal();
+		portals->push_back(portal);
+	}
+	Json::Value portalArray = Json::Value(Json::arrayValue);
+
+	for (Portal* portal : *portals)
+	{
+		portalArray.append(portal->Encode());
+	}
+#pragma endregion
 
 	json["Character"] = character->Encode();
 	json["Enemies"] = enemyArray;
+	json["Portals"] = portalArray;
 
 	return json;
 }
@@ -81,7 +100,7 @@ Save* Save::Decode(Json::Value json)
 
 	save->character = Character::Decode(json["Character"]);
 
-	Json::Value enemiesArray = json["enemies"];
+	Json::Value enemiesArray = json["Enemies"];
 
 	for (Json::Value enemyJson : enemiesArray)
 	{

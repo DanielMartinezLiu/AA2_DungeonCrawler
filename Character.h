@@ -1,5 +1,6 @@
 #pragma once
 #include <json/json.h>
+#include <iostream>
 
 #include "Vector2.h"
 #include "Weapon.h"

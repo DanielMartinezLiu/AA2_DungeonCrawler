@@ -25,7 +25,6 @@ int main()
 {
 	Map* map = new Map(Vector2(10, 10), Vector2(2, 2));
 	Save* save = new Save();
-	//save->SaveDungeonCrawler();
-	save->LoadDungeonCrawler();
-
+	save->SaveDungeonCrawler();
+	//save->LoadDungeonCrawler();
 }

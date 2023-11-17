@@ -1,5 +1,5 @@
 #include "Vector2.h"
-
+#include <iostream>
 Vector2::Vector2()
 {
 
@@ -26,6 +26,8 @@ Vector2* Vector2::Decode(Json::Value json)
 
 	vector2->x = json["x"].asInt();
 	vector2->y = json["y"].asInt();
+
+	std::cout << "Position X: " << vector2->x << "\nPosition Y: " << vector2->y << std::endl;
 
 	return vector2;
 }

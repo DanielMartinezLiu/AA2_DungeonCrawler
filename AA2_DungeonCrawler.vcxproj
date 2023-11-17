@@ -140,6 +140,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Save.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Timer.cpp">
@@ -162,6 +163,7 @@
     <ClInclude Include="Lance.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Portal.h" />
     <ClInclude Include="Save.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="Timer.h" />

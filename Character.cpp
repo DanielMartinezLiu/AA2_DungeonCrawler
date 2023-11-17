@@ -33,5 +33,9 @@ Character* Character::Decode(Json::Value json)
 	character->currentWeapon = Weapon::Decode(json["weapons"]);
 	character->currentPosition = Vector2::Decode(json["position"]);
 	
+	std::cout << "Player Life: " << character->currentLife << std::endl;
+	std::cout << "Player Coins: " << character->currentCoin << std::endl;
+	std::cout << "Player Potions: " << character->currentPotions << std::endl;
+
 	return character;
 }
