@@ -5,7 +5,7 @@
 #include "Vector2.h"
 #include "Weapon.h"
 
-class Character
+class Character : public NodeContent
 {
 public:
 	Character();
@@ -17,9 +17,10 @@ public:
 	int currentCoin = 0;
 	int currentPotions = 0;
 
-	Weapon* currentWeapon = new Weapon();
-
+	Weapon* currentWeapon;
 	Vector2* currentPosition = new Vector2(0,0);
+
+	void Draw(Vector2 offset) override;
 
 	virtual Json::Value Encode();
 	static Character* Decode(Json::Value json);

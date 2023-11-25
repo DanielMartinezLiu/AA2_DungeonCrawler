@@ -2,14 +2,15 @@
 
 Map::Map(Vector2 size, Vector2 offset)
 {
-	*_size = size;
-	*_offset = offset;
+	_id = 0;
+	_size = size;
+	_offset = offset;
 	_grid = new NodeGrid();
 
-	for (int x = 0; x < _size->x; x++)
+	for (int x = 0; x < _size.x; x++)
 	{
 		NodeColumn* colum = new NodeColumn();
-		for (int y = 0; y < _size->y; y++)
+		for (int y = 0; y < _size.y; y++)
 		{
 			colum->push_back(new Node(Vector2(x, y)));
 		}
@@ -25,7 +26,7 @@ Node* Map::UnsafeGetNode(Vector2 position)
 
 void Map::UnSafeDraw(Vector2 offset)
 {
-	Vector2 totalOffset = *_offset + offset;
+	Vector2 totalOffset = _offset + offset;
 
 	for (NodeColumn* column : *_grid)
 	{
@@ -39,20 +40,19 @@ void Map::UnSafeDraw(Vector2 offset)
 void Map::SafePickNode(Vector2 position, SafePick safePickAction)
 {
 	_sizeMutex->lock();
-	Vector2 size = *_size;
+	Vector2 size = _size;
 	_sizeMutex->unlock();
 
-	if (position.x >= _size->x || position.y >= _size->y)
+	if (position.x >= _size.x || position.y >= _size.y)
 	{
 		safePickAction(nullptr);
 		return;
 	}
 
 	_gridMutex->lock();
-
 	Node* node = UnsafeGetNode(position);
-
 	_gridMutex->unlock();
+
 	node->Lock();
 	safePickAction(node);
 	node->Unlock();
@@ -63,7 +63,7 @@ void Map::SafePickNodes(std::list<Vector2> positions, SafeMultiPick safeMultiPic
 	std::list<Node*>* nodes = new std::list<Node*>();
 
 	_sizeMutex->lock();
-	Vector2 size = *_size;
+	Vector2 size = _size;
 	_sizeMutex->unlock();
 
 	for (Vector2 pos : positions)
@@ -81,7 +81,6 @@ void Map::SafePickNodes(std::list<Vector2> positions, SafeMultiPick safeMultiPic
 	}
 
 	_safeMultiPickMutex->lock();
-
 	for (Node* node : *nodes)
 	{
 		if (node != nullptr)
@@ -89,7 +88,6 @@ void Map::SafePickNodes(std::list<Vector2> positions, SafeMultiPick safeMultiPic
 			node->Lock();
 		}
 	}
-
 	_safeMultiPickMutex->unlock();
 
 	safeMultiPick(nodes);
@@ -106,7 +104,7 @@ void Map::SafePickNodes(std::list<Vector2> positions, SafeMultiPick safeMultiPic
 Vector2 Map::GetOffset()
 {
 	_offsetMutex->lock();
-	Vector2 offset = *_offset;
+	Vector2 offset = _offset;
 	_offsetMutex->unlock();
 	return offset;
 }
@@ -114,7 +112,7 @@ Vector2 Map::GetOffset()
 Vector2 Map::GetSize()
 {
 	_sizeMutex->lock();
-	Vector2 size = *_size;
+	Vector2 size = _size;
 	_sizeMutex->unlock();
 	return size;
 }
@@ -123,8 +121,14 @@ Json::Value Map::Encode()
 {
 	Json::Value json;
 
-	json["size"] = _size->Encode();
-	json["offset"] = _offset->Encode();
+	json["idMap"] = _id;
+	json["size"] = _size.Encode();
+	json["offset"] = _offset.Encode();
 
 	return json;
+}
+
+Map* Map::Decode(Json::Value json)
+{
+	return nullptr;
 }

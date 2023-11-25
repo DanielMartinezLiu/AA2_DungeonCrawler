@@ -19,9 +19,8 @@ class Save
 {
 public:
 	Save();
+	Save(Map* map);
 	~Save();
-
-	Vector2* mapSize;
 
 	Character* character;
 	Map* map;
@@ -34,4 +33,5 @@ public:
 
 	Json::Value Encode();
 	Save* Decode(Json::Value json);
+
 };

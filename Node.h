@@ -1,5 +1,5 @@
 #pragma once
-#include "INodeContent.h"
+#include "NodeContent.h"
 #include "Vector2.h"
 #include <mutex>
 
@@ -7,7 +7,7 @@ class Node
 {
 private:
 	Vector2 _position;
-	INodeContent* _content = nullptr;
+	NodeContent* _content = nullptr;
 	std::mutex* _classMutex = new std::mutex();
 
 public:
@@ -15,16 +15,16 @@ public:
 
 	Vector2 GetPosition();
 
-	INodeContent* GetContent();
+	NodeContent* GetContent();
 
-	template<typename T, typename = typename std::enable_if<std::is_base_of<INodeContent, T>::value>::tyoe>
+	template<typename T, typename = typename std::enable_if<std::is_base_of<NodeContent, T>::value>::tyoe>
 	T* GetContent()
 	{
 		T* contentCasted = dynamic_cast<T*>(_content);
 		return contentCasted;
 	}
 
-	template<typename T, typename = typename std::enable_if<std::is_base_of<INodeContent, T>::value>::tyoe>
+	template<typename T, typename = typename std::enable_if<std::is_base_of<NodeContent, T>::value>::tyoe>
 	bool TryGetContent(T*& outContent)
 	{
 		T* contentCasted = dynamic_cast<T*>(_content);
@@ -38,7 +38,7 @@ public:
 		return false;
 	}
 
-	void SetContent(INodeContent* newContent);
+	void SetContent(NodeContent* newContent);
 	void DrawContent(Vector2 offset);
 
 	void Lock();

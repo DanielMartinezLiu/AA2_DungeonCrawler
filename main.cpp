@@ -2,29 +2,27 @@
 #include "Node.h"
 #include "ConsoleControl.h"
 #include "Map.h"
-
-class Wall : public INodeContent
-{
-public:
-	Wall();
-	~Wall();
-
-	void Draw(Vector2 offset) override
-	{
-		Vector2 pos = offset;
-		ConsoleControl::LockMutex();
-		ConsoleControl::SetPosition(pos.x, pos.y);
-		ConsoleControl::SetColor(ConsoleControl::WHITE);
-		std::cout << "#";
-		ConsoleControl::SetColor();
-		ConsoleControl::UnlockMutex();
-	}
-};
+#include "Chest.h"
+#include "StartupMap.h"
 
 int main()
 {
-	Map* map = new Map(Vector2(10, 10), Vector2(2, 2));
-	Save* save = new Save();
+	Vector2 mapSize = Vector2(20, 10);
+	Vector2 offset = Vector2(22, 12);
+
+	Map* map = new Map(mapSize, offset);
+	
+	
+	StartupMap* startupMap = new StartupMap(map);
+
+	map->UnSafeDraw();
+
+	Chest* chest = new Chest();
+	chest->ChoseRandomContent();
+	
+	// Save
+	Save* save = new Save(map);
+
 	save->SaveDungeonCrawler();
 	//save->LoadDungeonCrawler();
 }

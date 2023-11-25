@@ -1,13 +1,14 @@
 #pragma once
 #include <json/json.h>
+#include "Node.h"
 
-class Weapon
+class Weapon : public NodeContent
 {
 public:
 
 	enum WeaponType
 	{
-		UNKNOWN = 0, SWORD = 1, LANCE = 2, AXE = 3
+		UNKNOWN = 0, SWORD = 1, LANCE = 2
 	};
 
 	int damage = 1;

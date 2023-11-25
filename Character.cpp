@@ -10,6 +10,11 @@ Character::~Character()
 	
 }
 
+void Character::Draw(Vector2 offset)
+{
+
+}
+
 Json::Value Character::Encode()
 {
 	Json::Value json;

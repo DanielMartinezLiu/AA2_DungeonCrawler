@@ -5,10 +5,10 @@ Vector2::Vector2()
 
 }
 
-Vector2::Vector2(int x, int y)
+Vector2::Vector2(int newX, int newY)
 {
-	x = x;
-	y = y;
+	x = newX;
+	y = newY;
 }
 Json::Value Vector2::Encode()
 {

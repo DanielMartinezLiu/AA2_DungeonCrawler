@@ -1,5 +1,6 @@
 #pragma once
 #include "Weapon.h"
+#include "Node.h"
 
 class Lance : public Weapon
 {
