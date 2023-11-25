@@ -19,7 +19,6 @@ void Timer::StartLoopTimer(unsigned long timerRequiredMiliseconds, OnTimeElapsed
 			ConsoleControl::Wait(timerRequiredMiliseconds);
 			continueLoop = onTimeElapse();
 		}
-
 		});
 	thread->detach();
 }

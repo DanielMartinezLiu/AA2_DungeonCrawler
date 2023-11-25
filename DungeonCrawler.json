@@ -1,0 +1,122 @@
+{
+	"Map" : 
+	{
+		"Character" : 
+		{
+			"coin" : 30,
+			"life" : 10,
+			"position" : 
+			{
+				"x" : 0,
+				"y" : 0
+			},
+			"potions" : 1,
+			"weapons" : 
+			{
+				"damage" : 2,
+				"range" : 1,
+				"type" : 1
+			}
+		},
+		"Enemies" : 
+		[
+			{
+				"life" : 3,
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				},
+				"state" : 0
+			},
+			{
+				"life" : 3,
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				},
+				"state" : 0
+			},
+			{
+				"life" : 3,
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				},
+				"state" : 0
+			},
+			{
+				"life" : 3,
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				},
+				"state" : 0
+			},
+			{
+				"life" : 3,
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				},
+				"state" : 0
+			}
+		],
+		"MapValues" : 
+		{
+			"idMap" : 0,
+			"offset" : 
+			{
+				"x" : 22,
+				"y" : 12
+			},
+			"size" : 
+			{
+				"x" : 20,
+				"y" : 10
+			}
+		},
+		"Portals" : 
+		[
+			{
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				}
+			},
+			{
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				}
+			},
+			{
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				}
+			},
+			{
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				}
+			},
+			{
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				}
+			}
+		]
+	}
+}
