@@ -142,7 +142,7 @@ void Map::SetCharacter(Player* player)
 {
 	_player = player;
 }
-*/
+
 void Map::SetCharacterPosition()
 {
 	
@@ -151,9 +151,8 @@ void Map::SetCharacterPosition()
 		{
 			node->SetContent(player);
 		});
-		
 }
-
+*/
 Json::Value Map::Encode()
 {
 	Json::Value json;

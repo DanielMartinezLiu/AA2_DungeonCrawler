@@ -107,6 +107,7 @@ Json::Value Character::Encode()
 
 Character* Character::Decode(Json::Value json)
 {
+	return new Character();
 	/*
 	Character* character = new Character();
 

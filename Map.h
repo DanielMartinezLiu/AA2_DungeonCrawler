@@ -6,10 +6,8 @@
 #include "Node.h"
 #include "Vector2.h"
 #include "ConsoleControl.h"
-#include "Player.h"
-#include "Scene.h"
 
-class Map : public Scene
+class Map
 {
 public:
 	typedef std::vector<Node*> NodeColumn;
