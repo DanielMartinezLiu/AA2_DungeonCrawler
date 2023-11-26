@@ -3,20 +3,7 @@
 	{
 		"Character" : 
 		{
-			"coin" : 30,
-			"life" : 10,
-			"position" : 
-			{
-				"x" : 0,
-				"y" : 0
-			},
-			"potions" : 1,
-			"weapons" : 
-			{
-				"damage" : 2,
-				"range" : 1,
-				"type" : 1
-			}
+			"life" : 10
 		},
 		"Enemies" : 
 		[
@@ -71,8 +58,8 @@
 			"idMap" : 0,
 			"offset" : 
 			{
-				"x" : 22,
-				"y" : 12
+				"x" : 2,
+				"y" : 2
 			},
 			"size" : 
 			{

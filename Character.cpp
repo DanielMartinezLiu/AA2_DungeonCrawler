@@ -84,7 +84,7 @@ void Character::SetMap(Map* map)
 
 void Character::SetPosition(Vector2 position)
 {
-	*currentPosition = position;
+	currentPosition = &position;
 }
 
 Vector2* Character::GetPosition()
@@ -100,7 +100,7 @@ Json::Value Character::Encode()
 	//json["coin"] = currentCoin;
 	//json["potions"] = currentPotions;
 	//json["weapons"] = currentWeapon->Encode();
-	json["position"] = currentPosition->Encode();
+	//json["position"] = currentPosition->Encode();
 
 	return json;
 }

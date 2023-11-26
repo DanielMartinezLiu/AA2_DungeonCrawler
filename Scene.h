@@ -15,6 +15,6 @@ public:
 	void SetPlayer(Player* player);
 	void SetMap(Map* map);
 
+	Map* GetMap();
 	Vector2 GetPosition();
-
 };
