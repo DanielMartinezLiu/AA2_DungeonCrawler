@@ -2,9 +2,11 @@
 
 #include <json/json.h>
 #include <vector>
-#include "Vector2.h"
 
-class Enemy
+#include "Vector2.h"
+#include "Character.h"
+
+class Enemy : public Character
 {
 public:
 	enum State

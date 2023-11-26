@@ -1,18 +1,22 @@
 #pragma once
 #include <vector>
-#include "Node.h"
-#include "Vector2.h"
 #include <functional>
 #include <list>
 
-class Map
+#include "Node.h"
+#include "Vector2.h"
+#include "ConsoleControl.h"
+#include "Player.h"
+#include "Scene.h"
+
+class Map : public Scene
 {
 public:
 	typedef std::vector<Node*> NodeColumn;
 	typedef std::vector<NodeColumn*> NodeGrid;
 
 	typedef std::function<void(Node* node)> SafePick;
-	typedef std::function<void(std::list<Node*>* nodes)> SafeMultiPick;
+	typedef std::function<void(std::vector<Node*>* nodes)> SafeMultiPick;
 
 private:
 	int _id;
@@ -29,16 +33,20 @@ private:
 	std::mutex* _safeMultiPickMutex = new std::mutex();
 
 	Node* UnsafeGetNode(Vector2 position);
-
 public:
 	Map(Vector2 size, Vector2 offset);
 	void UnSafeDraw(Vector2 offset = Vector2());
 	void SafePickNode(Vector2 position, SafePick safePickAction);
 
-	void SafePickNodes(std::list<Vector2> positions, SafeMultiPick safeMultiPick);
+	void SafePickNodes(std::vector<Vector2> positions, SafeMultiPick safeMultiPick);
+
+	void InitMap();
 
 	Vector2 GetOffset();
 	Vector2 GetSize();
+	
+	//void SetCharacter(Player* player);
+	void SetCharacterPosition();
 
 	virtual Json::Value Encode();
 	static Map* Decode(Json::Value json);

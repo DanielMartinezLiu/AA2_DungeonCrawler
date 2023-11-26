@@ -6,6 +6,15 @@
 class Node
 {
 private:
+	enum {
+		PLAYER,
+		ENEMY,
+		CHEST,
+		POTION,
+		COIN,
+		PORTAL
+	};
+
 	Vector2 _position;
 	NodeContent* _content = nullptr;
 	std::mutex* _classMutex = new std::mutex();
