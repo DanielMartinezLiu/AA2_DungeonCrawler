@@ -6,18 +6,62 @@ Chest::Chest()
 
 Chest::~Chest()
 {
-}
 
-void Chest::Draw(Vector2 offset)
-{
 }
 
 void Chest::ChoseRandomContent()
 {
-	srand(time(NULL));
-	int randomNumber = rand() % 3;
+	std::srand(std::time(NULL));
+	int randomObject = std::rand() % 4;
 
-	_content->GetContent();
+	switch (randomObject)
+	{
+	case 0:
+		_map->SafePickNode(_currentPosition, [](Node* node)
+			{
+				node->SetContent(new Potion());
+			});
+		break;
+	case 1:
+		_map->SafePickNode(_currentPosition, [](Node* node)
+			{
+				node->SetContent(new Coin());
+			});
+		break;
+	case 2:
+		_map->SafePickNode(_currentPosition, [](Node* node)
+			{
+				node->SetContent(new Sword());
+			});
+		break;
+	case 3:
+		_map->SafePickNode(_currentPosition, [](Node* node)
+			{
+				node->SetContent(new Lance());
+			});
+		break;
+	default:
+		break;
+	}
+}
 
-	std::cout << randomNumber << std::endl;
+void Chest::SetMap(Map* map)
+{
+	_map = map;
+}
+
+void Chest::SetPosition(Vector2 position)
+{
+	_currentPosition = position;
+}
+
+void Chest::Draw(Vector2 offset)
+{
+	Vector2 pos = offset;
+	ConsoleControl::LockMutex();
+	ConsoleControl::SetPosition(pos.x, pos.y);
+	ConsoleControl::SetColor(ConsoleControl::DARKCYAN);
+	std::cout << "?";
+	ConsoleControl::SetColor();
+	ConsoleControl::UnlockMutex();
 }

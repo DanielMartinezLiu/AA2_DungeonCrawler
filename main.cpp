@@ -3,7 +3,7 @@
 #include "ConsoleControl.h"
 #include "Chest.h"
 #include "Character.h"
-#include "Scene.h"
+#include "GameManager.h"
 
 int main()
 {
@@ -13,19 +13,41 @@ int main()
 	Player* player = new Player();
 	player->SetPosition(Vector2(10, 5));
 
-	Enemy* enemy = new Enemy();
-	enemy->SetPosition(Vector2(3, 3));
+	Enemy* enemy1 = new Enemy();
+	enemy1->SetPosition(Vector2(3, 3));
+
+	Enemy* enemy2 = new Enemy();
+	enemy2->SetPosition(Vector2(7, 7));
+
+	GameManager* gameManager = new GameManager();
 
 	Map* map = new Map(mapSize, offset);
 
 	map->InitMap();
-	map->UnSafeDraw();
 
 	player->SetMap(map);
-	enemy->SetMap(map);
+
+	enemy1->SetMap(map);
+	enemy2->SetMap(map);
 
 	player->InitThread();
-	enemy->InitThread();
+
+	enemy1->InitThread();
+	enemy2->InitThread();
+
+	std::srand(std::time(NULL));
+
+	gameManager->SetMap(map);
+	gameManager->CoinSpawner(4);
+	gameManager->PotionSpawner(4);
+	gameManager->ChestSpawner(4);
+
+
+	UI::DrawUI(player->currentLife, player->currentCoin, player->currentPotions, player->currentWeapon);
+	
+
+	map->UnSafeDraw();
+
 #pragma region Save
 	Save* save = new Save(map);
 

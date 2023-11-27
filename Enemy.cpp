@@ -13,8 +13,7 @@ void Enemy::EnemyMovement()
 {
 	if (_isAlive)
 	{
-		std::srand(std::time(NULL));
-		int randomMovement = std::rand() % 4;
+		int randomMovement = GenerateRandomNumber();
 
 		switch (randomMovement)
 		{
@@ -63,6 +62,15 @@ void Enemy::InitThread()
 		movingMutex->unlock();
 		return true;
 	});
+}
+
+int Enemy::GenerateRandomNumber() {
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+	std::default_random_engine generator(seed);
+	std::uniform_int_distribution<int> distribution(0, 3);  
+
+	return distribution(generator);
 }
 
 bool Enemy::ObjectForward(Node* node)

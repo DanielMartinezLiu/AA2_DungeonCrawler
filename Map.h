@@ -42,9 +42,6 @@ public:
 
 	Vector2 GetOffset();
 	Vector2 GetSize();
-	
-	//void SetCharacter(Player* player);
-	//void SetCharacterPosition();
 
 	virtual Json::Value Encode();
 	static Map* Decode(Json::Value json);

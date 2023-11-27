@@ -32,10 +32,6 @@ void Map::InitMap()
 	{
 		for (int y = 0; y < _size.y; y++)
 		{
-			if (x == (int)_size.x / 2 && y == (int)_size.y / 2)
-			{
-				//(*(*_grid)[x])[y]->SetContent(new Character());
-			}
 			if (x == 0 || x == _size.x - 1 || y == 0 || y == _size.y - 1)
 			{
 				(*(*_grid)[x])[y]->SetContent(new Wall());
