@@ -11,64 +11,6 @@ Character::~Character()
 	
 }
 
-/*
-void Character::CharacterInput()
-{
-	inputInstance.StartListener();
-
-	inputInstance.AddListener(KB_UP, [this](int keyCode) {
-
-		Move(Vector2(currentPosition->x, currentPosition->y - 1));
-		
-		});
-	inputInstance.AddListener(KB_DOWN, [this](int keyCode) {
-
-		Move(Vector2(currentPosition->x, currentPosition->y + 1));
-
-		});
-	inputInstance.AddListener(KB_LEFT, [this](int keyCode) {
-
-		Move(Vector2(currentPosition->x - 1, currentPosition->y));
-
-		});
-	inputInstance.AddListener(KB_RIGHT, [this](int keyCode) {
-
-		Move(Vector2(currentPosition->x + 1, currentPosition->y));
-
-		});
-}
-
-void Character::Move(Vector2 position)
-{
-	std::vector<Vector2> movement;
-	movement.push_back(*currentPosition);
-	movement.push_back(position);
-	*currentPosition = position;
-
-	map->SafePickNodes(movement, [this](std::vector<Node*>* nodes)
-		{
-			
-			(*nodes)[0]->SetContent(nullptr);
-			(*nodes)[0]->DrawContent(map->GetOffset());
-			(*nodes)[1]->SetContent(this);
-			(*nodes)[1]->DrawContent(map->GetOffset());
-		});
-
-	
-	map->SafePickNode(*currentPosition, [this](Node* node) 
-		{
-			node->SetContent(nullptr);
-			node->DrawContent(map->GetOffset());
-		});
-
-	map->SafePickNode(position, [this](Node* node)
-		{
-			node->SetContent(this);
-			node->DrawContent(map->GetOffset());
-		});
-	
-}
-*/
 void Character::Draw(Vector2 offset)
 {
 
@@ -94,6 +36,18 @@ void Character::SetIsAlive(bool isAlive)
 	isAliveMutex->lock();
 	_isAlive = isAlive;
 	isAliveMutex->unlock();
+
+	if (!isAlive)
+	{
+		ConsoleControl::Clear();
+
+		map->SafePickNode(*currentPosition, [](Node* node)
+			{
+				node->SetContent(new Coin());
+			});
+
+		map->UnSafeDraw();
+	}
 }
 
 Json::Value Character::Encode()

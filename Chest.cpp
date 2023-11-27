@@ -6,6 +6,7 @@ Chest::Chest()
 
 Chest::~Chest()
 {
+
 }
 
 void Chest::ChoseRandomContent()

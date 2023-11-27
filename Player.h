@@ -13,6 +13,7 @@ class Player : public Character
 {
 private:
 	std::thread* movingThread;
+	bool _canMove;
 
 public:
 	int currentCoin = 0;

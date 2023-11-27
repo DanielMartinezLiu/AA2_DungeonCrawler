@@ -31,7 +31,6 @@ void GameManager::PotionSpawner(int quantity)
 
 void GameManager::ChestSpawner(int quantity)
 {
-
 	for (int i = 0; i < quantity; i++)
 	{
 		Vector2 position = GetRandomPosition();

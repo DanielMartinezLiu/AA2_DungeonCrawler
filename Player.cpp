@@ -4,8 +4,8 @@ Player::Player()
 {
 	movingThread = new std::thread();
 	timer = new Timer();
-	currentWeapon = new Weapon();
-	currentWeapon->type = Weapon::SWORD;
+	currentWeapon = new Sword();
+	_canMove = true;
 }
 
 Player::~Player()
@@ -46,6 +46,10 @@ void Player::CharacterInput()
 
 void Player::Move(Vector2 position)
 {
+	if (!_canMove)
+	{
+		return;
+	}
 	if (ObjectForward(map->UnsafeGetNode(position)))
 	{
 
@@ -59,16 +63,16 @@ void Player::Move(Vector2 position)
 			bool canContinue = true;
 			bool canContinueCheking = true;
 
-			map->SafePickNode(positionSave, [&canContinue, &canContinueCheking](Node* node)
+			Character* enemy;
+
+			map->SafePickNode(positionSave, [&canContinue, &canContinueCheking, &enemy](Node* node)
 				{
 					if (node->GetContent() != nullptr)
 					{
-						Character* enemy;
 						Wall* wall;
 
 						if (node->TryGetContent<Character>(enemy))
 						{
-							enemy->SetIsAlive(false);
 							canContinue = false;
 						}
 						else
@@ -79,6 +83,7 @@ void Player::Move(Vector2 position)
 				});
 			if (!canContinue)
 			{
+				enemy->SetIsAlive(false);
 				return;
 			}
 			if (!canContinueCheking)
@@ -98,6 +103,12 @@ void Player::Move(Vector2 position)
 				(*nodes)[0]->DrawContent(map->GetOffset());
 				(*nodes)[1]->SetContent(this);
 				(*nodes)[1]->DrawContent(map->GetOffset());
+			});
+
+		_canMove = false;
+		timer->StartTimer(500, [this]()
+			{
+				_canMove = true;
 			});
 	}
 }
