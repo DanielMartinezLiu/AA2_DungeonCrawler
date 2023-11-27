@@ -131,28 +131,11 @@ Vector2 Map::GetOffset()
 
 Vector2 Map::GetSize()
 {
-	_sizeMutex->lock();
 	Vector2 size = _size;
-	_sizeMutex->unlock();
 	return size;
 }
 
-/*
-void Map::SetCharacter(Player* player)
-{
-	_player = player;
-}
 
-void Map::SetCharacterPosition()
-{
-	
-	player->SetMap(this);
-	SafePickNode(*player->GetPosition(), [this](Node* node)
-		{
-			node->SetContent(player);
-		});
-}
-*/
 Json::Value Map::Encode()
 {
 	Json::Value json;

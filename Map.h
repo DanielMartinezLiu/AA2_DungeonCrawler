@@ -30,13 +30,13 @@ private:
 
 	std::mutex* _safeMultiPickMutex = new std::mutex();
 
-	Node* UnsafeGetNode(Vector2 position);
 public:
 	Map(Vector2 size, Vector2 offset);
 	void UnSafeDraw(Vector2 offset = Vector2());
 	void SafePickNode(Vector2 position, SafePick safePickAction);
 
 	void SafePickNodes(std::vector<Vector2> positions, SafeMultiPick safeMultiPick);
+	Node* UnsafeGetNode(Vector2 position);
 
 	void InitMap();
 
@@ -44,7 +44,7 @@ public:
 	Vector2 GetSize();
 	
 	//void SetCharacter(Player* player);
-	void SetCharacterPosition();
+	//void SetCharacterPosition();
 
 	virtual Json::Value Encode();
 	static Map* Decode(Json::Value json);

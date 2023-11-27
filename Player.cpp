@@ -4,7 +4,6 @@ Player::Player()
 {
 	Character::Character();
 	currentWeapon = new Weapon();
-	movingThread = new std::thread(&Player::CharacterInput, this);
 }
 
 Player::~Player()
@@ -40,27 +39,106 @@ void Player::CharacterInput()
 void Player::Move(Vector2 position)
 {
 
-	std::vector<Vector2> movement;
-	movement.push_back(*currentPosition);
-	movement.push_back(position);
-	*currentPosition = position;
+	if (ObjectForward(map->UnsafeGetNode(position)))
+	{
+		std::vector<Vector2> movement;
+		movement.push_back(*currentPosition);
+		movement.push_back(position);
+		*currentPosition = position;
 
-	map->SafePickNodes(movement, [this](std::vector<Node*>* nodes)
-		{
 
-			(*nodes)[0]->SetContent(nullptr);
-			(*nodes)[0]->DrawContent(map->GetOffset());
-			(*nodes)[1]->SetContent(this);
-			(*nodes)[1]->DrawContent(map->GetOffset());
-		});
+		map->SafePickNodes(movement, [this](std::vector<Node*>* nodes)
+			{
+				(*nodes)[0]->SetContent(nullptr);
+				(*nodes)[0]->DrawContent(map->GetOffset());
+				(*nodes)[1]->SetContent(this);
+				(*nodes)[1]->DrawContent(map->GetOffset());
+			});
+	}
 }
+
+void Player::InitThread()
+{
+	movingThread = new std::thread(&Player::CharacterInput, this);	
+}
+
+bool Player::ObjectForward(Node* node)
+{
+	if (HittingWall(node))
+	{
+		return false;
+	}
+	if (HittingCharacter(node))
+	{
+		return true;
+	}
+	return true;
+}
+
+#pragma region CollisionDetection
+bool Player::HittingWall(Node* node)
+{
+	Wall* wall = new Wall();
+
+	if (node->TryGetContent<Wall>(wall))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Player::HittingCoin(Node* node)
+{
+	Coin* coin = new Coin();
+
+	if (node->TryGetContent<Coin>(coin))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Player::HittingPotion(Node* node)
+{
+	Potion* potion = new Potion();
+
+	if (node->TryGetContent<Potion>(potion))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Player::HittingChest(Node* node)
+{
+	Chest* chest = new Chest();
+
+	if (node->TryGetContent<Chest>(chest))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Player::HittingCharacter(Node* node)
+{
+	Character* character = new Character();
+
+	if (node->TryGetContent<Character>(character))
+	{
+		character->SetIsAlive(false);
+		return true;
+	}
+	return false;
+}
+#pragma endregion
 
 void Player::Draw(Vector2 offset)
 {
 	Vector2 pos = offset;
 	ConsoleControl::LockMutex();
 	ConsoleControl::SetPosition(pos.x, pos.y);
-	ConsoleControl::SetColor(ConsoleControl::YELLOW);
+	ConsoleControl::SetColor(ConsoleControl::GREEN);
 	std::cout << "P";
 	ConsoleControl::SetColor();
 	ConsoleControl::UnlockMutex();

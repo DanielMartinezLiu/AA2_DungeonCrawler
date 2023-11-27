@@ -1,14 +1,18 @@
 #pragma once
 
 #include <json/json.h>
-#include <vector>
+#include <random>
 
-#include "Vector2.h"
 #include "Character.h"
+#include "Player.h"
 
 class Enemy : public Character
 {
+private:
+	std::mutex* movingMutex = new std::mutex();
 public:
+
+
 	enum State
 	{
 		IDLE = 0, CHASING = 1, ATTACK = 2
@@ -17,12 +21,20 @@ public:
 	Enemy();
 	~Enemy();
 
-	int currentLife = 0;
-	int maxLife = 3;
+	Timer* timer;
 
 	State currentState = IDLE;
 
-	Vector2* currentPosition = new Vector2(0, 0);
+	void EnemyMovement();
+	void Move(Vector2 position);
+
+	void InitThread();
+
+	bool ObjectForward(Node* node);
+
+	bool HittingWall(Node* node);
+
+	void Draw(Vector2 offset) override;
 
 	virtual Json::Value Encode();
 	static Enemy* Decode(Json::Value json);

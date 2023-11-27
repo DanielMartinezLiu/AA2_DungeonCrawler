@@ -4,9 +4,6 @@ Character::Character()
 {
 
 	currentLife = maxLife;
-	//currentWeapon = new Weapon();
-	
-	//movingThread = new std::thread(&Character::CharacterInput, this);
 }
 
 Character::~Character()
@@ -90,6 +87,13 @@ void Character::SetPosition(Vector2 position)
 Vector2* Character::GetPosition()
 {
 	return currentPosition;
+}
+
+void Character::SetIsAlive(bool isAlive)
+{
+	isAliveMutex->lock();
+	_isAlive = isAlive;
+	isAliveMutex->unlock();
 }
 
 Json::Value Character::Encode()
