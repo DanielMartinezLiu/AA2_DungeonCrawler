@@ -1,6 +1,6 @@
 #include "UI.h"
 
-void UI::DrawUI(int lifes, int coins, int potions)
+void UI::DrawUI(int lifes, int coins, int potions, Weapon* weapon)
 {
 	ConsoleControl::LockMutex();
 
@@ -18,6 +18,12 @@ void UI::DrawUI(int lifes, int coins, int potions)
 	ConsoleControl::SetColor(ConsoleControl::MAGENTA);
 	std::cout << "POTIONS: " << potions;
 	ConsoleControl::SetColor();
+
+	ConsoleControl::SetPosition(30, 13);
+	ConsoleControl::SetColor(ConsoleControl::BLUE);
+	std::cout << "WEAPON: " << weapon->name;
+	ConsoleControl::SetColor();
+
 
 	ConsoleControl::UnlockMutex();
 }

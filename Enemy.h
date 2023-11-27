@@ -29,6 +29,7 @@ public:
 	void Move(Vector2 position);
 
 	void InitThread();
+	int GenerateRandomNumber();
 
 	bool ObjectForward(Node* node);
 

@@ -2,6 +2,5 @@
 
 void PickeableWeapon::Draw(Vector2 offset)
 {
-
-
+	
 }

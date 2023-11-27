@@ -5,6 +5,8 @@
 #include "Weapon.h"
 #include "Coin.h"
 #include "Potion.h"
+#include "Sword.h"
+#include "Lance.h"
 
 class Chest : public NodeContent
 {
@@ -23,5 +25,4 @@ public:
 
 	void SetMap(Map* map);
 	void SetPosition(Vector2 position);
-
 };

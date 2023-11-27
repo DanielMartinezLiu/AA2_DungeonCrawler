@@ -11,7 +11,7 @@ Chest::~Chest()
 void Chest::ChoseRandomContent()
 {
 	std::srand(std::time(NULL));
-	int randomObject = std::rand() % 2;
+	int randomObject = std::rand() % 4;
 
 	switch (randomObject)
 	{
@@ -25,6 +25,18 @@ void Chest::ChoseRandomContent()
 		_map->SafePickNode(_currentPosition, [](Node* node)
 			{
 				node->SetContent(new Coin());
+			});
+		break;
+	case 2:
+		_map->SafePickNode(_currentPosition, [](Node* node)
+			{
+				node->SetContent(new Sword());
+			});
+		break;
+	case 3:
+		_map->SafePickNode(_currentPosition, [](Node* node)
+			{
+				node->SetContent(new Lance());
 			});
 		break;
 	default:

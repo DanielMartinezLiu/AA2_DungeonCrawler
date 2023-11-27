@@ -4,6 +4,7 @@
 #include "Potion.h"
 #include "Chest.h"
 #include "Enemy.h"
+#include "Timer.h"
 
 #include "Map.h"
 #include "UI.h"
@@ -11,6 +12,7 @@
 static class GameManager
 {
 private:
+	static Timer* _timer;
 	static Map* _map;
 
 public:

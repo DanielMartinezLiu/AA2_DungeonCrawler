@@ -5,6 +5,7 @@ Player::Player()
 	movingThread = new std::thread();
 	timer = new Timer();
 	currentWeapon = new Weapon();
+	currentWeapon->type = Weapon::SWORD;
 }
 
 Player::~Player()
@@ -73,7 +74,7 @@ void Player::HealthPlayer()
 	{
 		currentLife++;
 		currentPotions--;
-		UI::DrawUI(currentLife, currentCoin, currentPotions);
+		UI::DrawUI(currentLife, currentCoin, currentPotions, currentWeapon);
 	}
 }
 
@@ -94,12 +95,12 @@ bool Player::ObjectForward(Node* node)
 	}
 	if (HittingCoin(node))
 	{
-		UI::DrawUI(currentLife, currentCoin, currentPotions);
+		UI::DrawUI(currentLife, currentCoin, currentPotions, currentWeapon);
 		return true;
 	}
 	if (HittingPotion(node))
 	{
-		UI::DrawUI(currentLife, currentCoin, currentPotions);
+		UI::DrawUI(currentLife, currentCoin, currentPotions, currentWeapon);
 		return true;
 	}
 	if (HittingChest(node))
@@ -108,6 +109,11 @@ bool Player::ObjectForward(Node* node)
 	}
 	if (HittingCharacter(node))
 	{
+		return true;
+	}
+	if (HittingWeapon(node))
+	{
+		UI::DrawUI(currentLife, currentCoin, currentPotions, currentWeapon);
 		return true;
 	}
 	return true;
@@ -169,6 +175,17 @@ bool Player::HittingCharacter(Node* node)
 	if (node->TryGetContent<Character>(character))
 	{
 		character->SetIsAlive(false);
+		return true;
+	}
+	return false;
+}
+bool Player::HittingWeapon(Node* node)
+{
+	Weapon* weapon = new Weapon();
+
+	if (node->TryGetContent<Weapon>(weapon))
+	{
+		currentWeapon = weapon;
 		return true;
 	}
 	return false;
