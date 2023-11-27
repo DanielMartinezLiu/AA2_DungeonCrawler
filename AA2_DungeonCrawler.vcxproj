@@ -141,16 +141,17 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="Save.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="StartupMap.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Timer.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Git\AA2_DungeonCrawler\AA2_DungeonCrawler\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponBuilder.cpp" />
   </ItemGroup>
@@ -168,14 +169,15 @@
     <ClInclude Include="Lance.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="Save.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="StartupMap.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Wall.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponBuilder.h" />
   </ItemGroup>

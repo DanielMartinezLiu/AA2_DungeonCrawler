@@ -2,6 +2,7 @@
 
 Character::Character()
 {
+
 	currentLife = maxLife;
 }
 
@@ -10,9 +11,89 @@ Character::~Character()
 	
 }
 
+/*
+void Character::CharacterInput()
+{
+	inputInstance.StartListener();
+
+	inputInstance.AddListener(KB_UP, [this](int keyCode) {
+
+		Move(Vector2(currentPosition->x, currentPosition->y - 1));
+		
+		});
+	inputInstance.AddListener(KB_DOWN, [this](int keyCode) {
+
+		Move(Vector2(currentPosition->x, currentPosition->y + 1));
+
+		});
+	inputInstance.AddListener(KB_LEFT, [this](int keyCode) {
+
+		Move(Vector2(currentPosition->x - 1, currentPosition->y));
+
+		});
+	inputInstance.AddListener(KB_RIGHT, [this](int keyCode) {
+
+		Move(Vector2(currentPosition->x + 1, currentPosition->y));
+
+		});
+}
+
+void Character::Move(Vector2 position)
+{
+	std::vector<Vector2> movement;
+	movement.push_back(*currentPosition);
+	movement.push_back(position);
+	*currentPosition = position;
+
+	map->SafePickNodes(movement, [this](std::vector<Node*>* nodes)
+		{
+			
+			(*nodes)[0]->SetContent(nullptr);
+			(*nodes)[0]->DrawContent(map->GetOffset());
+			(*nodes)[1]->SetContent(this);
+			(*nodes)[1]->DrawContent(map->GetOffset());
+		});
+
+	
+	map->SafePickNode(*currentPosition, [this](Node* node) 
+		{
+			node->SetContent(nullptr);
+			node->DrawContent(map->GetOffset());
+		});
+
+	map->SafePickNode(position, [this](Node* node)
+		{
+			node->SetContent(this);
+			node->DrawContent(map->GetOffset());
+		});
+	
+}
+*/
 void Character::Draw(Vector2 offset)
 {
 
+}
+
+void Character::SetMap(Map* map)
+{
+	this->map = map;
+}
+
+void Character::SetPosition(Vector2 position)
+{
+	currentPosition = &position;
+}
+
+Vector2* Character::GetPosition()
+{
+	return currentPosition;
+}
+
+void Character::SetIsAlive(bool isAlive)
+{
+	isAliveMutex->lock();
+	_isAlive = isAlive;
+	isAliveMutex->unlock();
 }
 
 Json::Value Character::Encode()
@@ -20,16 +101,18 @@ Json::Value Character::Encode()
 	Json::Value json;
 
 	json["life"] = currentLife;
-	json["coin"] = currentCoin;
-	json["potions"] = currentPotions;
-	json["weapons"] = currentWeapon->Encode();
-	json["position"] = currentPosition->Encode();
+	//json["coin"] = currentCoin;
+	//json["potions"] = currentPotions;
+	//json["weapons"] = currentWeapon->Encode();
+	//json["position"] = currentPosition->Encode();
 
 	return json;
 }
 
 Character* Character::Decode(Json::Value json)
 {
+	return new Character();
+	/*
 	Character* character = new Character();
 
 	character->currentLife = json["life"].asInt();
@@ -43,4 +126,5 @@ Character* Character::Decode(Json::Value json)
 	std::cout << "Player Potions: " << character->currentPotions << std::endl;
 
 	return character;
+	*/
 }

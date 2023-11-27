@@ -55,4 +55,3 @@ public:
 
 	static ConsoleControl* GetInstance();
 };
-

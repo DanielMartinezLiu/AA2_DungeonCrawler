@@ -3,76 +3,23 @@
 	{
 		"Character" : 
 		{
-			"coin" : 30,
-			"life" : 10,
-			"position" : 
-			{
-				"x" : 0,
-				"y" : 0
-			},
-			"potions" : 1,
-			"weapons" : 
-			{
-				"damage" : 2,
-				"range" : 1,
-				"type" : 1
-			}
+			"life" : 10
 		},
 		"Enemies" : 
 		[
-			{
-				"life" : 3,
-				"position" : 
-				{
-					"x" : 0,
-					"y" : 0
-				},
-				"state" : 0
-			},
-			{
-				"life" : 3,
-				"position" : 
-				{
-					"x" : 0,
-					"y" : 0
-				},
-				"state" : 0
-			},
-			{
-				"life" : 3,
-				"position" : 
-				{
-					"x" : 0,
-					"y" : 0
-				},
-				"state" : 0
-			},
-			{
-				"life" : 3,
-				"position" : 
-				{
-					"x" : 0,
-					"y" : 0
-				},
-				"state" : 0
-			},
-			{
-				"life" : 3,
-				"position" : 
-				{
-					"x" : 0,
-					"y" : 0
-				},
-				"state" : 0
-			}
+			null,
+			null,
+			null,
+			null,
+			null
 		],
 		"MapValues" : 
 		{
 			"idMap" : 0,
 			"offset" : 
 			{
-				"x" : 22,
-				"y" : 12
+				"x" : 2,
+				"y" : 2
 			},
 			"size" : 
 			{

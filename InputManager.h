@@ -5,6 +5,8 @@
 #include <map>
 #include <list>
 
+#define inputInstance InputManager::Instance()
+
 class InputManager
 {
     class KeyBinding
@@ -16,7 +18,7 @@ class InputManager
         // No poner punteros en las funciones lamda, porque retienen memoria, y al usarla como punteros al pasarla a un sitio a otro para no ocasionar problemas.
         OnKeyPress onKeyPress; // Guardar la funcion lamda 
 
-        KeyBinding(int keyCode, unsigned long milisecondsTriggerDelay, OnKeyPress onKeyPress);
+        KeyBinding(int keyCode, OnKeyPress onKeyPress);
         ~KeyBinding();
         unsigned int GetSubscriptionId();
 
@@ -25,6 +27,11 @@ class InputManager
     };
 
 private:
+    InputManager();
+
+    InputManager(const InputManager&) = delete;
+    InputManager& operator = (const InputManager&) = delete;
+
     std::mutex* _isStartedMutex = new std::mutex();
     bool _isStarted = false;
 
@@ -35,18 +42,22 @@ private:
 
     std::thread* _listenerThread;
     void ReadLoop();
+    void SaveListener(KeyBinding* keyBinding);
 
 public:
-    InputManager();
+    inline static InputManager& Instance() 
+    {
+        static InputManager manager;
+        return manager;
+    }
+
     ~InputManager();
 
     void StartListener();
     void StopListener();
-    
-    void SaveListener(KeyBinding* keyBinding);
 
-    unsigned int AddListener(int keyCode, unsigned long milisecondsTriggerDelay, KeyBinding::OnKeyPress onKeyPress);
-    unsigned int AddListenerAsync(int keyCode, unsigned long milisecondsTriggerDelay, KeyBinding::OnKeyPress onKeyPress);
+    unsigned int AddListener(int keyCode, KeyBinding::OnKeyPress onKeyPress);
+    unsigned int AddListenerAsync(int keyCode, KeyBinding::OnKeyPress onKeyPress);
     void RemoveListener(unsigned int listenerId);
     void RemoveListenerAsync(unsigned int listenerId);
 };

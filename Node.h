@@ -6,6 +6,15 @@
 class Node
 {
 private:
+	enum {
+		PLAYER,
+		ENEMY,
+		CHEST,
+		POTION,
+		COIN,
+		PORTAL
+	};
+
 	Vector2 _position;
 	NodeContent* _content = nullptr;
 	std::mutex* _classMutex = new std::mutex();
@@ -17,14 +26,14 @@ public:
 
 	NodeContent* GetContent();
 
-	template<typename T, typename = typename std::enable_if<std::is_base_of<NodeContent, T>::value>::tyoe>
+	template<typename T, typename = typename std::enable_if<std::is_base_of<NodeContent, T>::value>::type>
 	T* GetContent()
 	{
 		T* contentCasted = dynamic_cast<T*>(_content);
 		return contentCasted;
 	}
 
-	template<typename T, typename = typename std::enable_if<std::is_base_of<NodeContent, T>::value>::tyoe>
+	template<typename T, typename = typename std::enable_if<std::is_base_of<NodeContent, T>::value>::type>
 	bool TryGetContent(T*& outContent)
 	{
 		T* contentCasted = dynamic_cast<T*>(_content);

@@ -1,26 +1,50 @@
 #pragma once
 #include <json/json.h>
+#include <mutex>
 #include <iostream>
+#include <thread>
+#include <list>
+#include <vector>
 
 #include "Vector2.h"
+#include "Map.h"
+#include "Timer.h"
+#include "Node.h"
+
+#include "Wall.h"
 #include "Weapon.h"
+#include "Coin.h"
+#include "Potion.h"
+#include "Chest.h"
+
+#include "InputManager.h"
 
 class Character : public NodeContent
 {
-public:
-	Character();
-	~Character();
+protected:
+	std::mutex* isAliveMutex = new std::mutex();
+	bool _isAlive;
 
+public:
 	int currentLife = 0;
 	int maxLife = 5;
 
-	int currentCoin = 0;
-	int currentPotions = 0;
+	Vector2* currentPosition;
 
-	Weapon* currentWeapon;
-	Vector2* currentPosition = new Vector2(0,0);
+	Character();
+	~Character();
+
+	Map* map;
 
 	void Draw(Vector2 offset) override;
+
+	void SetMap(Map* map);
+
+	void SetPosition(Vector2 position);
+
+	Vector2* GetPosition();
+
+	void SetIsAlive(bool isAlive);
 
 	virtual Json::Value Encode();
 	static Character* Decode(Json::Value json);

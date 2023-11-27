@@ -3,7 +3,7 @@
 
 InputManager::InputManager()
 {
-
+    _listenerThread = new std::thread();
 }
 
 InputManager::~InputManager()
@@ -33,7 +33,7 @@ void InputManager::StartListener()
 void InputManager::ReadLoop()
 {
     _isStartedMutex->lock();
-    bool isStarted = true;
+    bool isStarted = _isStarted;
     _isStartedMutex->unlock();
 
     while (isStarted)
@@ -90,18 +90,18 @@ void InputManager::SaveListener(KeyBinding* keyBinding)
     _listenersMapMutex->unlock();
 }
 
-unsigned int InputManager::AddListener(int keyCode, unsigned long milisecondsTriggerDelay,KeyBinding::OnKeyPress onKeyPress)
+unsigned int InputManager::AddListener(int keyCode, KeyBinding::OnKeyPress onKeyPress)
 {
-    KeyBinding* keyBinding = new KeyBinding(keyCode, milisecondsTriggerDelay, onKeyPress);
+    KeyBinding* keyBinding = new KeyBinding(keyCode, onKeyPress);
 
     SaveListener(keyBinding);
     
     return keyBinding->GetSubscriptionId();
 }
 
-unsigned int InputManager::AddListenerAsync(int keyCode, unsigned long milisecondsTriggerDelay,KeyBinding::OnKeyPress onKeyPress)
+unsigned int InputManager::AddListenerAsync(int keyCode,KeyBinding::OnKeyPress onKeyPress)
 {
-    KeyBinding* binding = new KeyBinding(keyCode, milisecondsTriggerDelay, onKeyPress);
+    KeyBinding* binding = new KeyBinding(keyCode, onKeyPress);
 
     std::thread* safeListenerThread = new std::thread(&InputManager::SaveListener, this, binding);
 
@@ -140,7 +140,7 @@ void InputManager::RemoveListenerAsync(unsigned int subscriptionId)
 }
 
 
-InputManager::KeyBinding::KeyBinding(int keyCode, unsigned long milisecondsTriggerDelay, OnKeyPress onKeyPress)
+InputManager::KeyBinding::KeyBinding(int keyCode, OnKeyPress onKeyPress)
 {
     static std::mutex currentIdMutex;
     currentIdMutex.lock();

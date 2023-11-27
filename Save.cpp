@@ -57,11 +57,11 @@ Json::Value Save::Encode()
 
 #pragma region CharacterCreationTest
 	character->currentLife = 10;
-	character->currentCoin = 30;
-	character->currentPotions = 1;
+	//character->currentCoin = 30;
+	//character->currentPotions = 1;
 
 	Sword* sword = new Sword();
-	character->currentWeapon = sword;
+	//character->currentWeapon = sword;
 #pragma endregion
 #pragma region EnemyCreationTest
 

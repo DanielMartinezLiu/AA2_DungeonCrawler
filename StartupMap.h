@@ -14,7 +14,7 @@ public:
 	void Draw(Vector2 offset) override;
 
 private:
-	char character;
+	unsigned char character;
 	Vector2 size;
 
 	void DrawMap();
