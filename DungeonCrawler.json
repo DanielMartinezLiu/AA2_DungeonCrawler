@@ -1,0 +1,69 @@
+{
+	"Map" : 
+	{
+		"Character" : 
+		{
+			"life" : 10
+		},
+		"Enemies" : 
+		[
+			null,
+			null,
+			null,
+			null,
+			null
+		],
+		"MapValues" : 
+		{
+			"idMap" : 0,
+			"offset" : 
+			{
+				"x" : 2,
+				"y" : 2
+			},
+			"size" : 
+			{
+				"x" : 20,
+				"y" : 10
+			}
+		},
+		"Portals" : 
+		[
+			{
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				}
+			},
+			{
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				}
+			},
+			{
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				}
+			},
+			{
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				}
+			},
+			{
+				"position" : 
+				{
+					"x" : 0,
+					"y" : 0
+				}
+			}
+		]
+	}
+}
