@@ -1,14 +1,19 @@
 #pragma once
 #include "Character.h"
 
+#include "Weapon.h"
+#include "Coin.h"
+#include "Potion.h"
+
+#include "InputManager.h"
+
+#include "UI.h"
+
 class Player : public Character
 {
 private:
-
 	Weapon* currentWeapon;
 	std::thread* movingThread;
-	
-	bool canMove;
 
 public:
 	int currentCoin = 0;

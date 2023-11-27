@@ -11,6 +11,8 @@ class Chest : public NodeContent
 private:
 	Node* _content;
 
+	Map* _map;
+	Vector2 _currentPosition;
 public:
 	Chest();
 	~Chest();
@@ -18,4 +20,8 @@ public:
 	void Draw(Vector2 offset) override;
 
 	void ChoseRandomContent();
+
+	void SetMap(Map* map);
+	void SetPosition(Vector2 position);
+
 };

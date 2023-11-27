@@ -34,9 +34,12 @@ void GameManager::ChestSpawner(int quantity)
 	{
 		Vector2 position = GetRandomPosition();
 
-		_map->SafePickNode(position, [](Node* node)
+		_map->SafePickNode(position, [&position](Node* node)
 			{
-				node->SetContent(new Chest());
+				Chest* chest = new Chest();
+				chest->SetMap(_map);
+				chest->SetPosition(position);
+				node->SetContent(chest);
 			});
 	}
 }

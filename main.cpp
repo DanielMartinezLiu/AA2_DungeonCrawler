@@ -38,6 +38,8 @@ int main()
 
 	map->UnSafeDraw();
 
+	UI::DrawUI(player->currentLife, player->currentCoin, player->currentPotions);
+
 #pragma region Save
 	Save* save = new Save(map);
 
@@ -46,6 +48,6 @@ int main()
 #pragma endregion
 	while (true)
 	{
-		UI::DrawUI(player->currentLife, player->currentCoin, player->currentPotions);
+
 	}
 }

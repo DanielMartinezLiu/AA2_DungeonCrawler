@@ -2,7 +2,8 @@
 
 Player::Player()
 {
-	Character::Character();
+	movingThread = new std::thread();
+	timer = new Timer();
 	currentWeapon = new Weapon();
 }
 
@@ -72,6 +73,7 @@ void Player::HealthPlayer()
 	{
 		currentLife++;
 		currentPotions--;
+		UI::DrawUI(currentLife, currentCoin, currentPotions);
 	}
 }
 
@@ -92,11 +94,17 @@ bool Player::ObjectForward(Node* node)
 	}
 	if (HittingCoin(node))
 	{
+		UI::DrawUI(currentLife, currentCoin, currentPotions);
 		return true;
 	}
 	if (HittingPotion(node))
 	{
+		UI::DrawUI(currentLife, currentCoin, currentPotions);
 		return true;
+	}
+	if (HittingChest(node))
+	{
+		return false;
 	}
 	if (HittingCharacter(node))
 	{
@@ -147,6 +155,8 @@ bool Player::HittingChest(Node* node)
 
 	if (node->TryGetContent<Chest>(chest))
 	{
+		chest->ChoseRandomContent();
+		node->DrawContent(map->GetOffset());
 		return true;
 	}
 	return false;

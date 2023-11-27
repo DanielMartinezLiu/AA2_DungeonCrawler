@@ -12,12 +12,7 @@
 #include "Node.h"
 
 #include "Wall.h"
-#include "Weapon.h"
-#include "Coin.h"
-#include "Potion.h"
 #include "Chest.h"
-
-#include "InputManager.h"
 
 class Character : public NodeContent
 {
