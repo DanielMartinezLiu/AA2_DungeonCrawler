@@ -38,14 +38,12 @@ void Player::CharacterInput()
 
 void Player::Move(Vector2 position)
 {
-
 	if (ObjectForward(map->UnsafeGetNode(position)))
 	{
 		std::vector<Vector2> movement;
 		movement.push_back(*currentPosition);
 		movement.push_back(position);
 		*currentPosition = position;
-
 
 		map->SafePickNodes(movement, [this](std::vector<Node*>* nodes)
 			{
@@ -67,6 +65,14 @@ bool Player::ObjectForward(Node* node)
 	if (HittingWall(node))
 	{
 		return false;
+	}
+	if (HittingCoin(node))
+	{
+		return true;
+	}
+	if (HittingPotion(node))
+	{
+		return true;
 	}
 	if (HittingCharacter(node))
 	{
@@ -93,6 +99,7 @@ bool Player::HittingCoin(Node* node)
 
 	if (node->TryGetContent<Coin>(coin))
 	{
+		coin++;
 		return true;
 	}
 	return false;
@@ -104,6 +111,7 @@ bool Player::HittingPotion(Node* node)
 
 	if (node->TryGetContent<Potion>(potion))
 	{
+		potion++;
 		return true;
 	}
 	return false;

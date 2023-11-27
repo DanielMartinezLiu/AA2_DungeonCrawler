@@ -28,6 +28,7 @@ public:
 	bool HittingChest(Node* node);
 	bool HittingCharacter(Node* node);
 
+
 	void Draw(Vector2 offset) override;
 
 };

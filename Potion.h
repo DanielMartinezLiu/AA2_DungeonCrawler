@@ -7,7 +7,7 @@ public:
 	Potion();
 	~Potion();
 
-	Vector2* position = new Vector2(0, 0);
+	void Draw(Vector2 offset) override;
 
 	virtual Json::Value Encode();
 	static Potion* Decode(Json::Value json);

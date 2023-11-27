@@ -10,6 +10,13 @@ Chest::~Chest()
 
 void Chest::Draw(Vector2 offset)
 {
+	Vector2 pos = offset;
+	ConsoleControl::LockMutex();
+	ConsoleControl::SetPosition(pos.x, pos.y);
+	ConsoleControl::SetColor(ConsoleControl::DARKCYAN);
+	std::cout << "?";
+	ConsoleControl::SetColor();
+	ConsoleControl::UnlockMutex();
 }
 
 void Chest::ChoseRandomContent()

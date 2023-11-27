@@ -4,6 +4,7 @@
 #include "Chest.h"
 #include "Character.h"
 #include "Scene.h"
+#include "GameManager.h"
 
 int main()
 {
@@ -16,16 +17,27 @@ int main()
 	Enemy* enemy = new Enemy();
 	enemy->SetPosition(Vector2(3, 3));
 
+	GameManager* gameManager = new GameManager();
+
 	Map* map = new Map(mapSize, offset);
 
 	map->InitMap();
-	map->UnSafeDraw();
 
 	player->SetMap(map);
 	enemy->SetMap(map);
 
 	player->InitThread();
 	enemy->InitThread();
+
+	std::srand(std::time(NULL));
+
+	gameManager->SetMap(map);
+	gameManager->CoinSpawner(4);
+	gameManager->PotionSpawner(4);
+	gameManager->ChestSpawner(4);
+
+	map->UnSafeDraw();
+
 #pragma region Save
 	Save* save = new Save(map);
 
