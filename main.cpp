@@ -42,9 +42,10 @@ int main()
 	gameManager->PotionSpawner(4);
 	gameManager->ChestSpawner(4);
 
-	map->UnSafeDraw();
 
 	UI::DrawUI(player->currentLife, player->currentCoin, player->currentPotions, player->currentWeapon);
+	
+	map->UnSafeDraw();
 
 #pragma region Save
 	Save* save = new Save(map);

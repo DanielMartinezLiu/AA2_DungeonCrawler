@@ -4,6 +4,8 @@ void UI::DrawUI(int lifes, int coins, int potions, Weapon* weapon)
 {
 	ConsoleControl::LockMutex();
 
+	ConsoleControl::Clear();
+
 	ConsoleControl::SetPosition(30, 10);
 	ConsoleControl::SetColor(ConsoleControl::RED);
 	std::cout << "LIFES: " << lifes;
@@ -23,7 +25,6 @@ void UI::DrawUI(int lifes, int coins, int potions, Weapon* weapon)
 	ConsoleControl::SetColor(ConsoleControl::BLUE);
 	std::cout << "WEAPON: " << weapon->name;
 	ConsoleControl::SetColor();
-
 
 	ConsoleControl::UnlockMutex();
 }

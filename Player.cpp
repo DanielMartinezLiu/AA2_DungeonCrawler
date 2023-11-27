@@ -48,6 +48,45 @@ void Player::Move(Vector2 position)
 {
 	if (ObjectForward(map->UnsafeGetNode(position)))
 	{
+
+		Vector2 direction = position - *currentPosition;
+		Vector2 positionSave = *currentPosition;
+
+		for (int i = 0; i < currentWeapon->range; i++)
+		{
+			positionSave = positionSave + direction;
+			
+			bool canContinue = true;
+			bool canContinueCheking = true;
+
+			map->SafePickNode(positionSave, [&canContinue, &canContinueCheking](Node* node)
+				{
+					if (node->GetContent() != nullptr)
+					{
+						Character* enemy;
+						Wall* wall;
+
+						if (node->TryGetContent<Character>(enemy))
+						{
+							enemy->SetIsAlive(false);
+							canContinue = false;
+						}
+						else
+						{
+							canContinueCheking = false;
+						}
+					}
+				});
+			if (!canContinue)
+			{
+				return;
+			}
+			if (!canContinueCheking)
+			{
+				break;
+			}
+		}
+
 		std::vector<Vector2> movement;
 		movement.push_back(*currentPosition);
 		movement.push_back(position);
@@ -75,6 +114,7 @@ void Player::HealthPlayer()
 		currentLife++;
 		currentPotions--;
 		UI::DrawUI(currentLife, currentCoin, currentPotions, currentWeapon);
+		map->UnSafeDraw();
 	}
 }
 
@@ -96,11 +136,13 @@ bool Player::ObjectForward(Node* node)
 	if (HittingCoin(node))
 	{
 		UI::DrawUI(currentLife, currentCoin, currentPotions, currentWeapon);
+		map->UnSafeDraw();
 		return true;
 	}
 	if (HittingPotion(node))
 	{
 		UI::DrawUI(currentLife, currentCoin, currentPotions, currentWeapon);
+		map->UnSafeDraw();
 		return true;
 	}
 	if (HittingChest(node))
@@ -114,6 +156,7 @@ bool Player::ObjectForward(Node* node)
 	if (HittingWeapon(node))
 	{
 		UI::DrawUI(currentLife, currentCoin, currentPotions, currentWeapon);
+		map->UnSafeDraw();
 		return true;
 	}
 	return true;

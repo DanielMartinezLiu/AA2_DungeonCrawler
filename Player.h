@@ -19,7 +19,6 @@ public:
 	int currentPotions = 0;
 
 	Weapon* currentWeapon;
-
 	Timer* timer;
 
 	Player();
