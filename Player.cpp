@@ -8,6 +8,7 @@ Player::Player()
 
 Player::~Player()
 {
+
 }
 
 void Player::CharacterInput()
@@ -32,6 +33,11 @@ void Player::CharacterInput()
 	inputInstance.AddListener(KB_RIGHT, [this](int keyCode) {
 
 		Move(Vector2(currentPosition->x + 1, currentPosition->y));
+			
+		});
+	inputInstance.AddListener(KB_P, [this](int keyCode) {
+
+		HealthPlayer();
 
 		});
 }
@@ -58,6 +64,24 @@ void Player::Move(Vector2 position)
 void Player::InitThread()
 {
 	movingThread = new std::thread(&Player::CharacterInput, this);	
+}
+
+void Player::HealthPlayer()
+{
+	if (/*currentLife <= maxLife && */currentPotions > 0)
+	{
+		currentLife++;
+		currentPotions--;
+	}
+}
+
+bool Player::CanMove()
+{
+	timer->StartLoopTimer(500, [this]()
+		{
+			return true;
+		});
+	return false;
 }
 
 bool Player::ObjectForward(Node* node)
@@ -99,7 +123,7 @@ bool Player::HittingCoin(Node* node)
 
 	if (node->TryGetContent<Coin>(coin))
 	{
-		coin++;
+		currentCoin++;
 		return true;
 	}
 	return false;
@@ -111,7 +135,7 @@ bool Player::HittingPotion(Node* node)
 
 	if (node->TryGetContent<Potion>(potion))
 	{
-		potion++;
+		currentPotions++;
 		return true;
 	}
 	return false;

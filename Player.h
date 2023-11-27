@@ -4,12 +4,16 @@
 class Player : public Character
 {
 private:
-	int currentCoin = 0;
-	int currentPotions = 0;
 
 	Weapon* currentWeapon;
 	std::thread* movingThread;
+	
+	bool canMove;
+
 public:
+	int currentCoin = 0;
+	int currentPotions = 0;
+
 	Timer* timer;
 
 	Player();
@@ -20,6 +24,10 @@ public:
 
 	void InitThread();
 
+	void HealthPlayer();
+	
+	bool CanMove();
+	
 	bool ObjectForward(Node* node);
 
 	bool HittingWall(Node* node);
@@ -27,7 +35,6 @@ public:
 	bool HittingPotion(Node* node);
 	bool HittingChest(Node* node);
 	bool HittingCharacter(Node* node);
-
 
 	void Draw(Vector2 offset) override;
 

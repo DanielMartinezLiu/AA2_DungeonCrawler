@@ -6,6 +6,7 @@
 #include "Enemy.h"
 
 #include "Map.h"
+#include "UI.h"
 
 static class GameManager
 {

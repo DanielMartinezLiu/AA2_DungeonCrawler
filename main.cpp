@@ -46,6 +46,6 @@ int main()
 #pragma endregion
 	while (true)
 	{
-
+		UI::DrawUI(player->currentLife, player->currentCoin, player->currentPotions);
 	}
 }
